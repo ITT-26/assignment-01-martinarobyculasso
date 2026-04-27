@@ -3,6 +3,7 @@ from DIPPID import SensorUDP
 PORT = 5700
 sensor = SensorUDP(PORT)
 
+# data is printed to quickly check what is being received
 def handle_accelerometer(data):
     print(data)
 
