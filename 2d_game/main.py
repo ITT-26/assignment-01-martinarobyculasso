@@ -65,8 +65,10 @@ heart_2.scale = 1.2
 heart_3 = pyglet.sprite.Sprite(heart_full_img, x=WINDOW_WIDTH-40, y=WINDOW_HEIGHT-40)
 heart_3.scale = 1.2
 
+# ======= LABELS =======
+
 # score label
-score_label = pyglet.text.Label(
+score_label_points = pyglet.text.Label(
     '0',
     font_size = 14,
     font_name='Fredoka',
@@ -86,7 +88,69 @@ score_label_text = pyglet.text.Label(
     anchor_x='right'
 )
 
+# game title and instructions
+game_title_label = pyglet.text.Label(
+    'Fishy',
+    font_name='Fredoka',
+    font_size = 50,
+    color = (0, 0, 0, 255),
+    x=WINDOW_WIDTH//2,
+    y=WINDOW_HEIGHT//2 + 100,
+    anchor_x='center',
+    anchor_y='center'
+)
+
+instructions_label_1 = pyglet.text.Label(
+    'Tilt the device up and down to move the fish.\nAvoid the obstacles and collect coins!',
+    font_name='Fredoka',
+    font_size=18,
+    color=(0, 0, 0, 255),
+    x=WINDOW_WIDTH//2,
+    y=WINDOW_HEIGHT//2 - 10,
+    anchor_x='center',
+    anchor_y='center',
+    multiline=True,
+    width=600,
+    align='center'
+)
+
+instructions_label_2 = pyglet.text.Label(
+    'Press SPACE to start',
+    font_name='Fredoka',
+    font_size=18,
+    color=(0, 153, 0, 255),
+    x=WINDOW_WIDTH//2,
+    y=WINDOW_HEIGHT//2 - 70,
+    anchor_x='center',
+    anchor_y='center'
+)
+
+# game over label
+game_over_label = pyglet.text.Label(
+    'Game Over',
+    font_name='Fredoka',
+    font_size = 50,
+    color = (204, 0, 0, 255),
+    x=WINDOW_WIDTH//2,
+    y=WINDOW_HEIGHT//2 + 50,
+    anchor_x='center',
+    anchor_y='center'
+)
+
+# restart instructions
+restart_label = pyglet.text.Label(
+    'Press R to restart',
+    font_name='Fredoka',
+    font_size=18,
+    color=(0, 0, 0, 255),
+    x=WINDOW_WIDTH//2,
+    y=WINDOW_HEIGHT//2 - 20,
+    anchor_x='center',
+    anchor_y='center'
+)
+
 # ======= CLASSES =======
+
 class Obstacle:
     def __init__(self, type, y_pos, speed):
         self.type = type
@@ -120,10 +184,14 @@ class Coin:
     def update_pos(self, dt):
         self.sprite.x -= self.speed*dt
 
-
 # ======= FUNCTIONS =======
 
 def create_obstacle(dt):
+
+    # avoid spawning obstacles when game is not active
+    if game_state != "playing":
+        return
+
     # random type
     rtype = random.randint(0, 1)
     if rtype == 0:
@@ -141,6 +209,11 @@ def create_obstacle(dt):
     obstacle_list.append(obstacle) 
 
 def create_coin(dt):
+
+    # avoid spawning coins when game is not active
+    if game_state != "playing":
+        return
+    
     # random y_pos
     coin_y = random.randint(SAND_HEIGHT, WINDOW_HEIGHT - 50)
     
@@ -183,7 +256,7 @@ def check_collisions():
             if lives <= 0:
                 fish.image = fish_skeleton_img
                 game_state = "freeze"
-                pyglet.clock.schedule_once(show_game_over, 2)
+                pyglet.clock.schedule_once(show_game_over, 1.5)
             else:
                 pyglet.clock.schedule_interval(toggle_blink, 0.15) 
                 pyglet.clock.schedule_once(blink_off, 2)
@@ -205,9 +278,27 @@ def show_game_over(dt):
     global game_state
     game_state = "game_over"
 
+def reset():
+    global lives, points, game_state, obstacle_list, coin_list, blink
+    lives = 3               # reset lives
+    points = 0              # reset points
+    blink = False
+    fish.opacity = 255 
+    update_lives()
+    update_score()
+    obstacle_list = []
+    coin_list = []
+    # fish returns to starting position
+    fish.x = 20
+    fish.y = 250
+    fish.image = fish_img   # (alive fish)
+    game_state = "playing"
+
 def update_lives():
     if lives == 3:
-        pass
+        heart_3.image = heart_full_img
+        heart_2.image = heart_full_img
+        heart_1.image = heart_full_img   
     elif lives == 2:
         heart_3.image = heart_empty_img
     elif lives == 1:
@@ -219,7 +310,7 @@ def update_lives():
         heart_1.image = heart_empty_img        
 
 def update_score():
-    score_label.text = str(points)
+    score_label_points.text = str(points)
 
 def update(dt):
     global obstacle_list, obs_keep, coin_list, coin_keep, points, game_state
@@ -282,7 +373,8 @@ def update(dt):
         pass
 
     elif game_state == "game_over":
-        pass
+        if keys[pyglet.window.key.R]:
+            reset()
 
 
 @win.event
@@ -294,12 +386,19 @@ def on_draw():
         heart_2.draw()
         heart_3.draw()
         score_label_text.draw()
-        score_label.draw()
+        score_label_points.draw()
         for obs in obstacle_list:
             obs.draw()
         for c in coin_list:
             c.draw()
         fish.draw()
+    elif game_state == "start_screen":
+        game_title_label.draw()
+        instructions_label_1.draw()
+        instructions_label_2.draw()
+    elif game_state == "game_over":
+        game_over_label.draw()
+        restart_label.draw()
 
 
 pyglet.clock.schedule_interval(update, 1/60)        # update game state at 60fps
