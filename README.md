@@ -38,3 +38,4 @@ python DIPPID_sender.py
 cd 2d_game
 python game_dippid.py
 ```
+> **Note:** Requires an M5Stack device connected to the same network and sending data via DIPPID on port 5700.
