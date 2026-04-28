@@ -7,7 +7,9 @@ import random
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 500
 SAND_HEIGHT = 140
-bounding_box_margin = 5
+BOUNDING_BOX_MARGIN = 5
+FISH_INIT_X = 50
+FISH_INIT_Y = 250
 
 # global variables
 game_state = "start_screen"    # "start_screen", "playing", "game_over", "freeze"
@@ -15,9 +17,9 @@ obstacle_list = []
 obs_keep = []
 coin_list = []
 coin_keep = []
+points = 0
 lives = 3
 blink = False
-points = 0
 
 # game window
 win = window.Window(WINDOW_WIDTH, WINDOW_HEIGHT, caption="Fishy")
@@ -43,7 +45,7 @@ background = pyglet.sprite.Sprite(background_img, x=0, y=0)
 # player sprite - fishy!
 fish_img = pyglet.resource.image('fish_red.png')
 fish_skeleton_img = pyglet.resource.image('fish_red_skeleton.png')
-fish = pyglet.sprite.Sprite(fish_img, x=20, y=250)      # initial position
+fish = pyglet.sprite.Sprite(fish_img, x=FISH_INIT_X, y=FISH_INIT_Y)      # initial position
 fish.scale = 0.6
 
 # obstacles
@@ -232,18 +234,18 @@ def check_collisions():
         return
     
     # smaller bounding box for the fish
-    fish_left = fish.x + bounding_box_margin
-    fish_right = fish.x + fish.width - bounding_box_margin
-    fish_bottom = fish.y + bounding_box_margin
-    fish_top = fish.y + fish.height - bounding_box_margin
+    fish_left = fish.x + BOUNDING_BOX_MARGIN
+    fish_right = fish.x + fish.width - BOUNDING_BOX_MARGIN
+    fish_bottom = fish.y + BOUNDING_BOX_MARGIN
+    fish_top = fish.y + fish.height - BOUNDING_BOX_MARGIN
 
     for obs in obstacle_list:
 
         # smaller bounding box for the obstacles
-        obs_left = obs.sprite.x + bounding_box_margin
-        obs_right = obs.sprite.x + obs.sprite.width - bounding_box_margin
-        obs_bottom = obs.sprite.y + bounding_box_margin
-        obs_top = obs.sprite.y + obs.sprite.height - bounding_box_margin
+        obs_left = obs.sprite.x + BOUNDING_BOX_MARGIN
+        obs_right = obs.sprite.x + obs.sprite.width - BOUNDING_BOX_MARGIN
+        obs_bottom = obs.sprite.y + BOUNDING_BOX_MARGIN
+        obs_top = obs.sprite.y + obs.sprite.height - BOUNDING_BOX_MARGIN
 
         if fish_right < obs_left or fish_left > obs_right or fish_top < obs_bottom or fish_bottom > obs_top:
             # collision = False
@@ -289,8 +291,8 @@ def reset():
     obstacle_list = []
     coin_list = []
     # fish returns to starting position
-    fish.x = 20
-    fish.y = 250
+    fish.x = FISH_INIT_X
+    fish.y = FISH_INIT_Y
     fish.image = fish_img   # (alive fish)
     game_state = "playing"
 
@@ -323,10 +325,10 @@ def update(dt):
 
     elif game_state == "playing":
         # smaller bounding box for the fish
-        fish_left = fish.x + bounding_box_margin
-        fish_right = fish.x + fish.width - bounding_box_margin
-        fish_bottom = fish.y + bounding_box_margin
-        fish_top = fish.y + fish.height - bounding_box_margin   
+        fish_left = fish.x + BOUNDING_BOX_MARGIN
+        fish_right = fish.x + fish.width - BOUNDING_BOX_MARGIN
+        fish_bottom = fish.y + BOUNDING_BOX_MARGIN
+        fish_top = fish.y + fish.height - BOUNDING_BOX_MARGIN   
 
         # handle fish movement
         if keys[pyglet.window.key.UP]:
@@ -355,10 +357,10 @@ def update(dt):
         
         for c in coin_list:
             # smaller bounding box for the coins
-            c_left = c.sprite.x + bounding_box_margin
-            c_right = c.sprite.x + c.sprite.width - bounding_box_margin
-            c_bottom = c.sprite.y + bounding_box_margin
-            c_top = c.sprite.y + c.sprite.height - bounding_box_margin
+            c_left = c.sprite.x + BOUNDING_BOX_MARGIN
+            c_right = c.sprite.x + c.sprite.width - BOUNDING_BOX_MARGIN
+            c_bottom = c.sprite.y + BOUNDING_BOX_MARGIN
+            c_top = c.sprite.y + c.sprite.height - BOUNDING_BOX_MARGIN
 
             if fish_right < c_left or fish_left > c_right or fish_top < c_bottom or fish_bottom > c_top:
                 coin_keep.append(c)
