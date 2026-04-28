@@ -1,6 +1,6 @@
 FILES IN 'dippid_sender':
 
-Sample code files (original): DIPPID.py, demo_heartbeat.py, simple_sender.py
-Sample code files (edited): vis_received_data.py (formerly demo_vis.py)
-Requested file for this ex.: DIPPID_sender.py
-Extra files: DIPPID_receiver.py (to verify connection), vis_received_data.py (to visualize received data)
+- Sample code files (original): DIPPID.py, demo_heartbeat.py, simple_sender.py
+- Sample code files (edited): vis_received_data.py (formerly demo_vis.py)
+- Requested file for ex. 1: DIPPID_sender.py
+- Extra files for ex. 1: DIPPID_receiver.py (to verify connection), vis_received_data.py (to visualize received data)
