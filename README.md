@@ -3,6 +3,7 @@
 
 ---
 Assignment 1 for the Interactive Techniques and Technologies course (ITT), Universität Regensburg.
+
 Author: Martina Roby Culasso
 
 ## Exercise 1 — DIPPID Sender
