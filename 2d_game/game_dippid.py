@@ -26,20 +26,22 @@ points = 0
 lives = 3
 blink = False
 accel_y = 0
+button = 0
 
 # dippid callbacks
 def handle_accelerometer(data):
     global accel_y
-    accel_y = float(data['y'])
+    accel_y = float(data['y'])      # we only need data from one axis
+
+def handle_button_1(data):
+    global button
+    button = int(data)              # button state: 1 = pressed, 0 = released
 
 sensor.register_callback('accelerometer', handle_accelerometer)
+sensor.register_callback('button_1', handle_button_1)
 
 # game window
 win = window.Window(WINDOW_WIDTH, WINDOW_HEIGHT, caption="Fishy")
-
-# keyboard input to start/restart game
-keys = pyglet.window.key.KeyStateHandler()
-win.push_handlers(keys)
 
 # ======= ASSETS =======
 
@@ -130,7 +132,7 @@ instructions_label_1 = pyglet.text.Label(
 )
 
 instructions_label_2 = pyglet.text.Label(
-    'Press SPACE to start',
+    'Press Button 1 to start',
     font_name='Fredoka',
     font_size=18,
     color=(0, 153, 0, 255),
@@ -154,7 +156,7 @@ game_over_label = pyglet.text.Label(
 
 # restart instructions
 restart_label = pyglet.text.Label(
-    'Press R to restart',
+    'Press Button 1 to restart',
     font_name='Fredoka',
     font_size=18,
     color=(0, 0, 0, 255),
@@ -331,7 +333,7 @@ def update(dt):
     coin_keep = []
 
     if game_state == "start_screen":
-        if keys[pyglet.window.key.SPACE]:
+        if button == 1:
             game_state = "playing"
 
     elif game_state == "playing":
@@ -384,9 +386,8 @@ def update(dt):
         pass
 
     elif game_state == "game_over":
-        if keys[pyglet.window.key.R]:
+        if button == 1:
             reset()
-
 
 @win.event
 def on_draw():

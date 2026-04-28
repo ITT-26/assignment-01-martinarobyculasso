@@ -7,11 +7,10 @@ Assignment 1 for the Interactive Techniques and Technologies course (ITT), Unive
 Author: Martina Roby Culasso
 
 ## Exercise 1 — DIPPID Sender
-Simulates a DIPPID input device by sending accelerometer and button data via UDP to localhost.
+Simulates an input device by sending accelerometer and button data via the DIPPID protocol over UDP to localhost.
 
 ## Exercise 2 — 2D Game
-A side-scrolling underwater game built with pyglet and controlled via DIPPID (M5Stack).
-Avoid obstacles (pufferfish and eels) and collect coins to score points.
+A side-scrolling underwater game built with pyglet, controlled using accelerometer and button data from an M5Stack transmitted via the DIPPID protocol over UDP.
 
 ---
 Each folder contains an `info.txt` file with a description of the files and relevant notes.

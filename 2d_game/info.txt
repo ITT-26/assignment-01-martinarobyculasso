@@ -3,7 +3,7 @@ FILES IN '2d_game'
 
 Main file (Exercise 2): game_dippid.py
 ---------------------------------------
-Game implementation using DIPPID as input device (M5Stack via UDP).
+Game implementation using the M5Stack as input device, communicating via the DIPPID protocol over UDP.
 
 NOTE: I was unable to connect the M5Stack to my dorm's WiFi or personal 
 hotspot. DIPPID input was tested using the DIPPID_sender.py developed 
@@ -13,7 +13,7 @@ the physical device to ensure full playability.
 
 Alternative file: game_keyboard.py
 ------------------------------------
-Version of the game using keyboard input (UP/DOWN arrow keys), used for 
+Version of the game using keyboard input (UP/DOWN arrows, SPACE, R keys), used for 
 development and testing purposes.
 
 Sample code (provided by course): DIPPID.py, pyglet_minimal.py
