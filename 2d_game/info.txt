@@ -1,0 +1,19 @@
+FILES IN '2d_game'
+==================
+
+Main file (Exercise 2): game_dippid.py
+---------------------------------------
+Game implementation using DIPPID as input device (M5Stack via UDP).
+
+NOTE: I was unable to connect the M5Stack to my dorm's WiFi or personal 
+hotspot. DIPPID input was tested using the DIPPID_sender.py developed 
+for Exercise 1, and communication works correctly. However, I was unable 
+to fine-tune the game parameters (movement sensitivity, thresholds) with 
+the physical device to ensure full playability.
+
+Alternative file: game_keyboard.py
+------------------------------------
+Version of the game using keyboard input (UP/DOWN arrow keys), used for 
+development and testing purposes.
+
+Sample code (provided by course): DIPPID.py, pyglet_minimal.py

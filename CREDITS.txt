@@ -1,7 +1,7 @@
 CREDITS
 =======
 
-DIPPID Sender:
+DIPPID Sender (Ex. 1):
 
 Code
 ----
@@ -9,7 +9,7 @@ Code for DIPPID sender, receiver and visualization structure based on sample cod
 provided by the Interactive Techniques and Technologies course (ITT), Universität Regensburg.
 
 
-2D Game:
+2D Game (Ex. 2):
 
 Assets
 ------
@@ -31,3 +31,8 @@ Fredoka - Google Fonts (fonts.google.com/specimen/Fredoka)
 Authors: Milka Brosh, Moran Lidor, Yaronkoren
 License: SIL Open Font License 1.1 (OFL)
 
+Code
+----
+pyglet documentation (pyglet.org) used as reference for game loop, sprites, and text rendering.
+GitHub Copilot used for inline code suggestions.
+Claude (Anthropic) used for guided learning and code review.

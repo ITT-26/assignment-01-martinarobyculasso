@@ -14,7 +14,7 @@ button_1 = 0        # 0 -> released , 1 -> pressed
 
 # amplitudes for the simulated accelerometer data
 a_x = 0.8
-a_y = 0.6
+a_y = 2.0
 a_z = 1.0
 
 # frequencies for the simulated accelerometer data

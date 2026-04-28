@@ -1,6 +1,15 @@
-FILES IN 'dippid_sender':
+FILES IN 'dippid_sender'
+========================
 
-- Sample code files (original): DIPPID.py, demo_heartbeat.py, simple_sender.py
-- Sample code files (edited): vis_received_data.py (formerly demo_vis.py)
-- Requested file for ex. 1: DIPPID_sender.py
-- Extra files for ex. 1: DIPPID_receiver.py (to verify connection), vis_received_data.py (to visualize received data)
+Main file (Exercise 1): DIPPID_sender.py
+------------------------------------------
+DIPPID input device simulator that sends accelerometer and button data
+via UDP to localhost.
+
+Additional files (Exercise 1):
+--------------------------------
+- DIPPID_receiver.py: minimal receiver used to verify UDP communication.
+- vis_received_data.py: visualization of received sensor data (adapted 
+  from demo_vis.py, provided by course).
+
+Sample code (provided by course): DIPPID.py, demo_heartbeat.py, simple_sender.py
