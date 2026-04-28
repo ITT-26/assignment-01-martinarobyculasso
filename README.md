@@ -14,3 +14,27 @@ A side-scrolling underwater game built with pyglet, controlled using acceleromet
 
 ---
 Each folder contains an `info.txt` file with a description of the files and relevant notes.
+
+---
+## Setup
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate    # Windows
+source .venv/bin/activate # macOS/Linux
+pip install -r requirements.txt
+```
+
+## How to run
+
+**Exercise 1 — DIPPID Sender:**
+```bash
+cd dippid_sender
+python DIPPID_sender.py
+```
+
+**Exercise 2 — 2D Game:**
+```bash
+cd 2d_game
+python game_dippid.py
+```
