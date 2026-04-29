@@ -103,7 +103,7 @@ game_title_label = pyglet.text.Label(
 )
 
 instructions_label_1 = pyglet.text.Label(
-    'Tilt the device up and down to move the fish.\nAvoid the obstacles and collect coins!',
+    'Use the UP and DOWN arrow keys to move the fish.\nAvoid the obstacles and collect coins!',
     font_name='Fredoka',
     font_size=18,
     color=(0, 0, 0, 255),
